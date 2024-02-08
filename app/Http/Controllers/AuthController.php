@@ -39,9 +39,10 @@ class AuthController extends Controller
 
         if (password_verify($request->password, $user->password)) {
             $jwt = JWT::encode($payload, $_ENV['JWT_SECRET'], $_ENV['JWT_ALGO']);
-            Cookie::queue(cookie()->forever('jwt', $jwt));
+            // Cookie::queue(cookie()->forever('jwt', $jwt));
             return response()->json([
                 'message' => 'Successfully logged in!',
+                'Authorisation' => $jwt,
             ], 200);
         }
     }
@@ -110,8 +111,6 @@ class AuthController extends Controller
     public function logout()
     {
         // Cookie::queue(Cookie::forget('jwt'));
-        // Cookie::queue(Cookie::forget('XSRF-TOKEN'));
-        cookie()->queue(cookie("hello", "value ", 60));
         return response()->json([
             'message' => 'Successfully logged out!',
         ], 200);

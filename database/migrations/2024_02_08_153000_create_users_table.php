@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->timestamps();
+            $table->integer('role_id')->default(1);
         });
     }
 

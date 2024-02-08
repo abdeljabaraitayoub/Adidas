@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pemissions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('role_id')->constrained('roles');
+            $table->foreignId('role_id')->constrained('users');
             $table->foreignId('route_id')->constrained('Routes');
         });
     }

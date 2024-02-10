@@ -5,15 +5,22 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+
+
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::all();
+        // DB::enableQueryLog(); // Enable query log
+        // dd(DB::getQueryLog()); // Show results of log
+        $products = Product::where('title', 'like', '%' . $request->search . '%')->where('catégorie', '')->paginate(5);
         return response()->json($products);
     }
 
@@ -35,21 +42,17 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(product $product)
     {
-        $product = Product::find($id);
-
         return response()->json($product);
-        //
     }
 
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductRequest $request, $id)
+    public function update(UpdateProductRequest $request, Product $product)
     {
-        $product = Product::find($id);
         $product->title = $request->title;
         $product->price = $request->price;
         $product->description = $request->description;
@@ -62,9 +65,8 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        $product = Product::find($id);
         $product->delete();
         return response()->json(null, 204);
     }

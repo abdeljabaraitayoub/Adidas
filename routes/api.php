@@ -25,10 +25,18 @@ Route::post('/login', 'App\Http\Controllers\AuthController@login')->name('login'
 
 //product routes
 Route::get('/products', 'App\Http\Controllers\ProductController@index')->name('read all products');
-Route::get('/products/{id}', 'App\Http\Controllers\ProductController@show')->name('read single products');
+Route::get('/products/{product}', 'App\Http\Controllers\ProductController@show')->name('read single products');
 Route::post('/products', 'App\Http\Controllers\ProductController@store')->name('create products');
-Route::put('/products/{id}', 'App\Http\Controllers\ProductController@update')->name('update products');
-Route::delete('/products/{id}', 'App\Http\Controllers\ProductController@destroy')->name('delete products');
+Route::put('/products/{product}', 'App\Http\Controllers\ProductController@update')->name('update products');
+Route::delete('/products/{product}', 'App\Http\Controllers\ProductController@destroy')->name('delete products');
+
+
+//category routes
+Route::get('/categories', 'App\Http\Controllers\CategoryController@index')->name('read all categories');
+Route::get('/categories/{category}', 'App\Http\Controllers\CategoryController@show')->name('read single categories');
+Route::post('/categories', 'App\Http\Controllers\CategoryController@store')->name('create categories');
+Route::put('/categories/{category}', 'App\Http\Controllers\CategoryController@update')->name('update categories');
+Route::delete('/categories/{category}', 'App\Http\Controllers\CategoryController@destroy')->name('delete categories');
 
 Route::middleware([Permission::class])->group(function () {
 

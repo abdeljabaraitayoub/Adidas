@@ -30,12 +30,12 @@ class Permission
             return response()->json(['message' => 'Invalid token'], 401);
         } else {
             $user = User::find($data->id);
-            dump($user);
+            // dump($user);
             $route = Route::where('name', $route->getName())->first();
-            dump($route);
+            // dump($route);
             $permission = pemissions::where('role_id', $user->role_id)->where('route_id', $route->id)->first();
 
-            dump($permission);
+            // dump($permission);
         }
         return $next($request);
     }

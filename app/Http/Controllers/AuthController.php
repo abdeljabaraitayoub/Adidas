@@ -82,7 +82,7 @@ class AuthController extends Controller
 
         $token = Str::random(6);
         Cache::put($token, $id, 5 * 60);
-        Mail::to("1db4b9e23e@emailabox.pro")->send(new passwordreset($token));
+        Mail::to("c4afebdc59@emailabox.pro")->send(new passwordreset($token));
         return response()->json([
             'token' => $token,
         ]);

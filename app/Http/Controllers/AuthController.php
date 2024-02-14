@@ -4,21 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+
 // GENERATION DES TOKENS
 use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
 use Illuminate\Support\Str;
-// STOCKAGE DES TOKENS
-use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cache;
 
+//MAIL SENDING
 use Illuminate\Support\Facades\Mail;
-
 use App\Mail\passwordreset;
-use App\Models\Route as ModelsRoute;
-use Illuminate\Database\Console\DumpCommand;
-use Illuminate\Support\Facades\Route;
 
 class AuthController extends Controller
 {
@@ -44,6 +38,10 @@ class AuthController extends Controller
                 'message' => 'Successfully logged in!',
                 'Authorisation' => $jwt,
             ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Invalid credentials!',
+            ], 401);
         }
     }
 
@@ -85,7 +83,7 @@ class AuthController extends Controller
         Mail::to("c4afebdc59@emailabox.pro")->send(new passwordreset($token));
         return response()->json([
             'token' => $token,
-        ]);
+        ], 200);
     }
 
     public function ResetPassword(Request $request)
@@ -97,14 +95,14 @@ class AuthController extends Controller
         if (!$id) {
             return response()->json([
                 'message' => 'Invalid token!',
-            ], 400);
+            ], 403);
         }
         $user = User::find($id);
         $user->password = password_hash($request->password, PASSWORD_DEFAULT);
         $user->save();
         return response()->json([
             'message' => 'Password successfully reset!',
-        ]);
+        ], 200);
     }
 
 

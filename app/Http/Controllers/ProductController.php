@@ -18,9 +18,9 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        // DB::enableQueryLog(); // Enable query log
-        // dd(DB::getQueryLog()); // Show results of log
-        $products = Product::where('title', 'like', '%' . $request->search . '%')->where('catégorie', '')->paginate(5);
+        $products = Product::join('categories', 'categories.id', 'products.category_id')->select('products.*', 'categories.name as category_name')
+            ->where('title', 'like', '%' . $request->search . '%')
+            ->paginate(5);
         return response()->json($products);
     }
 
@@ -36,7 +36,7 @@ class ProductController extends Controller
         $product->image = $request->image;
         $product->category_id = $request->category_id;
         $product->save();
-        return response()->json($product);
+        return response()->json($product, 201);
     }
 
     /**

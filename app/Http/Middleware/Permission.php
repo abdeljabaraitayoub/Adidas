@@ -10,6 +10,7 @@ use Firebase\JWT\Key;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Models\pemissions;
+use Illuminate\Support\Facades\DB;
 
 class Permission
 {
@@ -29,12 +30,19 @@ class Permission
         if (!$data) {
             return response()->json(['message' => 'Invalid token'], 401);
         } else {
+            DB::enableQueryLog();
             $user = User::find($data->id);
-            // dump($user);
+            if (!$user) {
+                return response()->json(['message' => 'User not found'], 401);
+            }
+            if ($user->role_id == 1) {
+                return $next($request);
+            }
             $route = Route::where('name', $route->getName())->first();
-            // dump($route);
             $permission = pemissions::where('role_id', $user->role_id)->where('route_id', $route->id)->first();
-
+            if (!$permission) {
+                return response()->json(['message' => 'You do not have permission to access this route'], 401);
+            }
             // dump($permission);
         }
         return $next($request);

@@ -20,8 +20,8 @@ class Usercontroller extends Controller
      */
     public function index()
     {
-        User::all();
-        return response()->json(User::all());
+        $users = User::join('roles', 'users.role_id', '=', 'roles.id')->select('users.*', 'roles.name as role_name')->get();
+        return response()->json($users, 200);
     }
 
     /**

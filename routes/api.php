@@ -25,31 +25,41 @@ Route::post('/login', 'App\Http\Controllers\AuthController@login')->name('login'
 
 
 Route::middleware([Permission::class])->group(function () {
-    //product routes
-    Route::get('/products', 'App\Http\Controllers\ProductController@index')->name('read all products');
-    Route::get('/products/{product}', 'App\Http\Controllers\ProductController@show')->name('read single products');
-    Route::post('/products', 'App\Http\Controllers\ProductController@store')->name('create products');
-    Route::put('/products/{product}', 'App\Http\Controllers\ProductController@update')->name('update products');
-    Route::delete('/products/{product}', 'App\Http\Controllers\ProductController@destroy')->name('delete products');
-
-    //category routes
-    Route::get('/categories', 'App\Http\Controllers\CategoryController@index')->name('read all categories');
-    Route::get('/categories/{category}', 'App\Http\Controllers\CategoryController@show')->name('read single categories');
-    Route::post('/categories', 'App\Http\Controllers\CategoryController@store')->name('create categorie');
-    Route::put('/categories/{category}', 'App\Http\Controllers\CategoryController@update')->name('update categorie');
-    Route::delete('/categories/{category}', 'App\Http\Controllers\CategoryController@destroy')->name('delete categorie');
-
-    //role routes
-    Route::get('/roles', 'App\Http\Controllers\RoleController@index')->name('read all roles');
-    Route::get('/roles/{role}', 'App\Http\Controllers\RoleController@show')->name('read single roles');
-    Route::post('/roles', 'App\Http\Controllers\RoleController@store')->name('create role');
-    Route::put('/roles/{role}', 'App\Http\Controllers\RoleController@update')->name('update role');
-    Route::delete('/roles/{role}', 'App\Http\Controllers\RoleController@destroy')->name('delete role');
-
-    //permission routes
-    Route::get('/permissions', 'App\Http\Controllers\PermissionController@index')->name('read all permissions');
-    Route::get('/permissions/{Permission}', 'App\Http\Controllers\PermissionController@show')->name('read single permission');
-    Route::post('/permissions', 'App\Http\Controllers\PermissionController@store')->name('create permission');
-    Route::put('/permissions/{Permission}', 'App\Http\Controllers\PermissionController@update')->name('update permission');
-    Route::delete('/permissions/{Permission}', 'App\Http\Controllers\PermissionController@destroy')->name('delete permission');
 });
+//product routes
+Route::get('/products', 'App\Http\Controllers\ProductController@index')->name('read all products');
+Route::get('/products/{product}', 'App\Http\Controllers\ProductController@show')->name('read single products');
+Route::post('/products', 'App\Http\Controllers\ProductController@store')->name('create products');
+Route::put('/products/{product}', 'App\Http\Controllers\ProductController@update')->name('update products');
+Route::delete('/products/{product}', 'App\Http\Controllers\ProductController@destroy')->name('delete products');
+
+//category routes
+Route::get('/categories', 'App\Http\Controllers\CategoryController@index')->name('read all categories');
+Route::get('/categories/{category}', 'App\Http\Controllers\CategoryController@show')->name('read single categories');
+Route::post('/categories', 'App\Http\Controllers\CategoryController@store')->name('create categorie');
+Route::put('/categories/{category}', 'App\Http\Controllers\CategoryController@update')->name('update categorie');
+Route::delete('/categories/{category}', 'App\Http\Controllers\CategoryController@destroy')->name('delete categorie');
+
+//role routes
+Route::get('/roles', 'App\Http\Controllers\RoleController@index')->name('read all roles');
+Route::get('/roles/{role}', 'App\Http\Controllers\RoleController@show')->name('read single roles');
+Route::post('/roles', 'App\Http\Controllers\RoleController@store')->name('create role');
+Route::put('/roles/{role}', 'App\Http\Controllers\RoleController@update')->name('update role');
+Route::delete('/roles/{role}', 'App\Http\Controllers\RoleController@destroy')->name('delete role');
+
+//permission routes
+Route::get('/permissions', 'App\Http\Controllers\PermissionController@index')->name('read all permissions');
+Route::get('/permissions/{Permission}', 'App\Http\Controllers\PermissionController@show')->name('read single permission');
+Route::post('/permissions', 'App\Http\Controllers\PermissionController@store')->name('create permission');
+Route::put('/permissions/{Permission}', 'App\Http\Controllers\PermissionController@update')->name('update permission');
+Route::delete('/permissions/{Permission}', 'App\Http\Controllers\PermissionController@destroy')->name('delete permission');
+
+//route routes
+Route::get('/routes', 'App\Http\Controllers\RouteController@index')->name('read all routes');
+
+//user routes
+Route::get('/users', 'App\Http\Controllers\Usercontroller@index')->name('read all users');
+Route::get('/users/{user}', 'App\Http\Controllers\Usercontroller@show')->name('read single user');
+Route::post('/users', 'App\Http\Controllers\Usercontroller@store')->name('create user');
+Route::put('/users/{user}', 'App\Http\Controllers\Usercontroller@update')->name('update user');
+Route::delete('/users/{user}', 'App\Http\Controllers\Usercontroller@destroy')->name('delete user');

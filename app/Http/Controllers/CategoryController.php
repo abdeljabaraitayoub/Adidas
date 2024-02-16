@@ -14,7 +14,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return response()->json($categories);
+        return response()->json($categories, 200);
     }
 
 
@@ -26,7 +26,7 @@ class CategoryController extends Controller
         $category = new Category();
         $category->name = $request->name;
         $category->save();
-        return response()->json($category);
+        return response()->json($category, 201);
         //
     }
 

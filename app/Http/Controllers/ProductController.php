@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */

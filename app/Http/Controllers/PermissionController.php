@@ -23,12 +23,18 @@ class PermissionController extends Controller
      */
     public function store(StorePermissionRequest $request)
     {
-        $permission = new permission();
-        $permission->route_id = $request->route_id;
-        $permission->role_id = $request->role_id;
-        $permission->save();
-        return response()->json($permission, 201);
+        $role_id = $request->role_id;
+        $route_ids = $request->route_ids;
+        foreach ($route_ids as $route_id) {
+            $permission = new Permission();
+            $permission->route_id = $route_id;
+            $permission->role_id = $role_id;
+            $permission->save();
+        }
+
+        return response()->json(['message' => 'Permissions created successfully'], 201);
     }
+
 
     /**
      * Display the specified resource.
